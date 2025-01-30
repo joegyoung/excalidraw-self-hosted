@@ -14,7 +14,7 @@ services:
       - VITE_APP_DISABLE_TRACKING=true
       - PUBLIC_URL=https://${APP_HOST}
     networks:
-      - ${TRAEFIK_NETWORK_NAME}
+      - proxy
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=${TRAEFIK_NETWORK_NAME}"
@@ -28,7 +28,7 @@ services:
     environment:
       - STORAGE_URI=mongodb://${DB_USER}:${DB_PASS}@mongodb:27017
     networks:
-      - ${TRAEFIK_NETWORK_NAME}
+      - proxy
       - draw-internal
     labels:
       - "traefik.enable=true"
@@ -41,7 +41,7 @@ services:
     image: excalidraw/excalidraw-room:sha-49bf529
     restart: unless-stopped
     networks:
-      - ${TRAEFIK_NETWORK_NAME}      
+      - proxy     
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=${TRAEFIK_NETWORK_NAME}"
@@ -73,7 +73,7 @@ services:
       - mongodb
     restart: unless-stopped
     networks:
-      - ${TRAEFIK_NETWORK_NAME}
+      - proxy
       - draw-internal
     labels:
       - "traefik.enable=true"
